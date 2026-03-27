@@ -1,0 +1,41 @@
+static_covariates:
+  - station_type             # retail / fleet / highway / mixed
+  - catchment_profile        # categorical encoding of area demographics
+  - dispenser_count
+  - storage_capacity_kg
+
+dynamic_covariates:
+  - dispensing_volume_kg     # target variable (lagged as input)
+  - temperature_c
+  - humidity_pct
+  - rainfall_mm
+  - aqi
+  - wind_speed_kmh
+  - traffic_speed_kmh
+  - traffic_density
+  - vehicle_population       # registered CNG vehicles in catchment
+
+target: dispensing_volume_kg
+
+lags: [1, 6, 12, 24, 48, 168]    # hours
+rolling_windows: [6, 12, 24, 168] # hours
+
+normalisation:
+  method: zscore                   # zscore | minmax
+  per_station: true                # normalise each station independently
+
+synthetic:
+  num_stations: 50
+  num_days: 365
+  seed: 42
+  bounding_box:                    # approximate Mumbai region
+    lat_min: 18.85
+    lat_max: 19.30
+    lon_min: 72.75
+    lon_max: 73.05
+  city_clusters: ["Mumbai_West", "Mumbai_East", "Navi_Mumbai", "Thane"]
+
+paths:
+  raw_data: data/raw/
+  processed_data: data/processed/
+  synthetic_data: data/synthetic/

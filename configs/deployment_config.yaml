@@ -1,0 +1,32 @@
+drift:
+  psi_threshold: 0.2
+  psi_warning_threshold: 0.1
+  window_days: 30
+  check_interval_hours: 24
+  n_bins: 10                       # equal-frequency bins for PSI calculation
+
+retraining:
+  strategy: fine_tune              # fine_tune | full_retrain
+  fine_tune_epochs: 10
+  holdout_window_days: 7
+  max_training_hours: 3
+  deploy_if_better: true           # auto-deploy if new MAPE < old MAPE
+  mape_improvement_threshold: 0.01 # minimum improvement required to deploy
+
+federated:
+  aggregation_schedule: weekly
+  min_participating_clusters: 3
+  weighting: data_volume           # weight by cluster data volume
+  rollback_degradation_threshold: 0.05  # MAPE increase that triggers rollback
+  max_aggregation_rounds: 50
+
+transfer_learning:
+  freeze_gcn_layers: true
+  fine_tune_epochs: 20
+  min_samples_for_fine_tune: 168   # 1 week of hourly data
+  unfreeze_after_epochs: 10        # unfreeze GCN after initial convergence
+
+onboarding:
+  target_hours: 48
+  min_historical_hours: 168        # 1 week minimum
+  cluster_assignment: nearest      # nearest | manual

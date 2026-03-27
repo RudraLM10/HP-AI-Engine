@@ -1,0 +1,40 @@
+# Core Deep Learning
+torch>=2.2
+torch-geometric>=2.5
+pytorch-forecasting>=1.1
+
+# Optimisation
+ortools>=9.9
+
+# Data Processing
+pandas>=2.1
+numpy>=1.26
+pydantic>=2.0
+pyarrow>=14.0
+
+# Geo / Graph
+osmnx>=1.7
+networkx>=3.2
+scikit-learn>=1.4
+geopy>=2.4
+
+# Explainability
+shap>=0.44
+
+# Config
+pyyaml>=6.0
+python-dotenv>=1.0
+
+# Database (optional)
+psycopg2-binary>=2.9
+sqlalchemy>=2.0
+
+# Caching (optional)
+redis>=5.0
+
+# Dev / Testing
+pytest>=8.0
+pytest-cov>=4.1
+ruff>=0.3
+mypy>=1.8
+matplotlib>=3.8

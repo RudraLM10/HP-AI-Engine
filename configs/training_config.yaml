@@ -1,0 +1,30 @@
+batch_size: 64
+learning_rate: 0.001
+max_epochs: 100
+early_stopping_patience: 10
+min_delta: 0.001               # minimum improvement to reset patience
+
+loss:
+  huber_delta: 1.0
+  mape_weight: 0.3             # weight of MAPE penalty term
+  horizon_weights:
+    short: 0.5                 # highest priority on short-term accuracy
+    mid: 0.3
+    long: 0.2
+
+scheduler:
+  type: one_cycle_lr
+  max_lr: 0.01
+  pct_start: 0.3
+
+gradient_clip_val: 1.0
+
+checkpoint:
+  dir: checkpoints/
+  save_top_k: 3               # keep best 3 checkpoints by val MAPE
+  save_every_n_epochs: 5
+
+validation:
+  val_split: 0.15
+  test_split: 0.10
+  split_strategy: temporal     # chronological split, not random

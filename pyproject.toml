@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "hp-ai-engine"
+version = "0.1.0"
+description = "CNG demand forecasting and optimisation engine for HPCL station network"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Proprietary"}
+
+dependencies = [
+    # Deep learning
+    "torch>=2.2",
+    "torch-geometric>=2.5",
+    "pytorch-forecasting>=1.1",
+
+    # Optimisation
+    "ortools>=9.9",
+
+    # Data
+    "pandas>=2.1",
+    "numpy>=1.26",
+    "pydantic>=2.0",
+    "pyarrow>=14.0",
+
+    # Geo / Graph
+    "osmnx>=1.7",
+    "networkx>=3.2",
+    "scikit-learn>=1.4",
+    "geopy>=2.4",
+
+    # Explainability
+    "shap>=0.44",
+
+    # Config / Logging
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+
+    # Database (optional — only needed for TimescaleDB integration)
+    "psycopg2-binary>=2.9",
+    "sqlalchemy>=2.0",
+
+    # Caching (optional — only needed for Redis integration)
+    "redis>=5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.1",
+    "ruff>=0.3",
+    "mypy>=1.8",
+    "ipykernel>=6.29",
+    "matplotlib>=3.8",
+]
+
+[tool.setuptools.packages.find]
+include = ["hp_ai_engine*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_functions = "test_*"
+addopts = "--tb=short -q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
